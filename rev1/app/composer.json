@@ -1,0 +1,11 @@
+{
+    "name": "root/app",
+    "autoload": {
+        "psr-4": {
+            "Root\\App\\": "src/"
+        }
+    },
+    "require": {
+        "robthree/twofactorauth": "^1.8"
+    }
+}

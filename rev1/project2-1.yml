@@ -1,0 +1,30 @@
+services:
+  server:
+    image: mattrayner/lamp:0.8.0-1804-php8
+    container_name: Fakhri-ServerDB
+    networks:
+      static-net:
+        ipv4_address: 10.10.10.20
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./mysql:/var/lib/mysql
+
+  browser:
+    image: jlesage/firefox
+    container_name: Fakhri-Browser
+    networks:
+      static-net:
+        ipv4_address: 10.10.10.30
+    ports:
+      - "5800:5800"
+    depends_on:
+      - server
+
+networks:
+  static-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.10.0/24

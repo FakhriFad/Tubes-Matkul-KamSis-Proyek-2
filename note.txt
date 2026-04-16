@@ -1,0 +1,10 @@
+Implementasi fitur
+
+https
+hash password with salt password_hash() 
+Prepared Statement prepare() and excecute() (prevent SQL Injection)
+htmlspecialchars (prevent Cross Side Scripting XSS) 
+CSRF Token (prevent Cross Side Request Forgery)
+Generic Error (prevent footprinting and leakage)
+Session Security
+Brute Force Protection
