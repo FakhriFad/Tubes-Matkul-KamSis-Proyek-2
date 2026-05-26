@@ -28,6 +28,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }elseif(!isPasswordStrong($password)){
         $message = "Password must be 8+ chars with uppercase, lowercase, number, and symbol.";
         $toastClass = "#007bff";
+    }elseif(strlen($username) > 50 || strlen($email) > 100 || strlen($password) > 255){
+        $message = "Input too long.";
     }else{
         $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
