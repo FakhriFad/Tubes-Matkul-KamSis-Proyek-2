@@ -1,0 +1,1 @@
+alert tcp any any -> any any (sid:1000001; msg:"TCP Terdeteksi";)

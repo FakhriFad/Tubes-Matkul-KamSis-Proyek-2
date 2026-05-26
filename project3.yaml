@@ -1,0 +1,52 @@
+services:
+  server:
+    image: mattrayner/lamp:0.8.0-1804-php8
+    container_name: Fakhri-ServerDB
+    networks:
+      static-net:
+        ipv4_address: 192.168.200.10
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./app:/var/www/html
+      - ./mysql:/var/lib/mysql
+
+  browser:
+    image: jlesage/firefox
+    container_name: Fakhri-Browser
+    networks:
+      static-net:
+        ipv4_address: 192.168.200.50
+    ports:
+      - "5800:5800"
+    depends_on:
+      - server
+  
+  snort:
+    image: ciscotalos/snort3
+    container_name: Fakhri-Snort
+    user: root
+    stdin_open: true
+    tty: true
+    network_mode: host
+    #networks:
+    #  static-net:
+    #    ipv4_address: 192.168.200.103
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./snort/lua:/home/snorty/snort3/etc/snort
+      - ./snort/rules:/home/snorty/snort3/etc/rules
+    environment:
+      - PATH=$PATH:/home/snorty/snort3/bin
+    depends_on:
+      - server
+
+networks:
+  static-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.200.0/24
