@@ -1,1 +1,2 @@
-alert tcp any any -> any any (sid:1000001; msg:"TCP Terdeteksi";)
+alert icmp any any -> any any (sid:1000001; msg:"ICMP Ping Detected";)
+alert tcp any any -> any any (sid:1000002; msg:"TCP Detected";)
