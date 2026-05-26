@@ -15,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if(empty($email) || empty($password)){
         $message = "Please enter a valid email and password";
         $toastClass = "bg-warning";
+    }elseif(strlen($email) > 100 || strlen($password) > 255){
+        $message = "Input too long.";
     }else{
         try{
             $stmt = $pdo->prepare("SELECT id, password, failed_attempts, account_locked_until, mfa_secret, mfa_enabled FROM users WHERE email = :email LIMIT 1");
